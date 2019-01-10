@@ -4,13 +4,15 @@ use std::sync::mpsc::{Receiver, Sender};
 use std::thread;
 use std::time::Duration;
 
-// struct to have a &str
-// struct with String first, then &str
+#[derive(Clone)]
+struct Wrapper<'a> {
+    input: &'a str,
+}
 
 // main function
 fn main() {
     // create a mspc for the struct
-    let (tx, rx): (Sender<String>, Receiver<String>) = mpsc::channel();
+    let (tx, rx): (Sender<Wrapper>, Receiver<Wrapper>) = mpsc::channel();
 
     // start the send loop
     thread::spawn(move || {
@@ -22,8 +24,10 @@ fn main() {
 }
 
 // function to send stuff into queue often
-fn send_loop(tx: Sender<String>) {
-    let input = "message".to_string();
+fn send_loop(tx: Sender<Wrapper>) {
+    let input = Wrapper {
+        input: "message",
+    };
     let five_seconds = Duration::new(5, 0);
 
     // start the send loop
@@ -39,8 +43,9 @@ fn send_loop(tx: Sender<String>) {
 }
 
 // function to continuously read stuff from
-fn read_loop(rx: Receiver<String>) {
+fn read_loop(rx: Receiver<Wrapper>) {
+    // This is an infinite loop.
     for received in rx {
-        println!("Got: {}", received);
+        println!("Got: {}", received.input);
     }
 }
