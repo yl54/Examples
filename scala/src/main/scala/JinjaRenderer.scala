@@ -3,10 +3,6 @@ package scala
 import java.util.{Map}
 
 import com.hubspot.jinjava.Jinjava
-import com.hubspot.jinjava.interpret.JinjavaInterpreter
-import com.hubspot.jinjava.loader.FileLocator
-import com.hubspot.jinjava.loader.ResourceLocator
-import com.hubspot.jinjava.tree.Node
 
 // object for renderer runner
 object JinjaRenderer {
