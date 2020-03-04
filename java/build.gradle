@@ -17,7 +17,7 @@ sourceCompatibility = 1.8
 
 // define the protobuf versions
 def grpcVersion = '1.27.2' // CURRENT_GRPC_VERSION
-def protobufVersion = '3.11.0'
+def protobufVersion = '3.11.1'
 def protocVersion = protobufVersion
 
 repositories {
@@ -28,12 +28,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // import/compile the grpc library here
-    implementation 'io.grpc:grpc-netty-shaded:1.27.2'
-    implementation 'io.grpc:grpc-protobuf:1.27.2'
-    implementation 'io.grpc:grpc-stub:1.27.2'
+    compile 'io.grpc:grpc-netty-shaded:1.27.2'
+    compile 'io.grpc:grpc-protobuf:1.27.2'
+    compile 'io.grpc:grpc-stub:1.27.2'
 
     // insert/compile protobuf files
-    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    compile "io.grpc:grpc-stub:${grpcVersion}"
 
     // examples/advanced need this for JsonFormat
     implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
@@ -48,7 +48,7 @@ protobuf {
     }
     plugins {
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.27.2'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.27.1'
         }
     }
     generateProtoTasks {
@@ -58,6 +58,7 @@ protobuf {
     }
     generatedFilesBaseDir = "$projectDir/src/generated"
 }
+
 
 startScripts.enabled = false
 
