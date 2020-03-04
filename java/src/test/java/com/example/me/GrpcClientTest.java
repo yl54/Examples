@@ -36,9 +36,16 @@ public class GrpcClientTest {
                 .build();
 
         // Create a client
+        GrpcClient client = new GrpcClient(channel);
 
         // Make a call to the service
+        GrpcClient.CallClient(channel, user);
 
         // Close the connection
+        try {
+            GrpcClient.CloseClient(channel);
+        } catch (Exception e) {
+            // move on with it
+        }
     }
 }
